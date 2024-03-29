@@ -1,0 +1,43 @@
+# -----------------------------------------------------------------------------------------
+# Service
+#
+# k8s definition:
+# A method for exposing a network application that is running as one or more Pods in your cluster.[-]
+# The set of Pods targeted by a Service is (usually) determined by a selector.
+# If more Pods are added or removed, the set of Pods matching the selector will change.
+# The Service makes sure that network traffic can be directed to the current set of Pods for the workload.
+# Kubernetes Services either use IP networking (IPv4, IPv6, or both), or reference an external name in the Domain Name System (DNS).
+# The Service abstraction enables other mechanisms, such as Ingress and Gateway.
+#
+# Annontations:
+# - Is a long running object
+# - Will have an ip address
+# - Will have stable fixed port
+# - Can be attached to pods
+
+# Types of services:
+#
+# ClusterIP:
+# Use it if the service is going to be an internal service.
+# Meaning it will only be accessible inside the cluster and not from external traffic (e.g browser). Other microservices can talk to it.
+# K8s will give the service a stable ip address because the service a long runnning object.
+
+# NodePort:
+# It will expose the port through the node. We can choose what port are we going to expose to the external world
+# -----------------------------------------------------------------------------------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-webapp
+spec:
+  # this defines which pods are going to be represented by this sevice
+  # the service becomes a network endpoint by either other services or maybe external users to connect to (eg browser)
+  selector:
+    app: webapp
+  ports:
+    - name: http
+      port: 80 # accept internal traffic using this port
+      targetPort: 80 # forward that traffic to the container/pod using this port
+      nodePort: 30080 # [ONLY FOR NODEPORT TYPE SERVICES]. It will specify which port is going to be expose through the node. It has to be greater than 30.000
+  type: NodePort
