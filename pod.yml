@@ -13,6 +13,8 @@ spec:
     image: richardchesterwood/k8s-fleetman-webapp-angular:release0-arm64
 
 
-# steps to create the pod
-# 1 - type the command: kubectl apply -f pod.yaml
-# 2 - type the command: kubectl get pod
+# common commands for pods
+# 1 - to create the pod,type the command: kubectl apply -f pod.yaml
+# 2 - to get the pod information, type the command: kubectl get pod
+# 3 - to execute a command on that pod, type the command: kubectl exec webapp -- <command>
+# 4 - to get a shell in the pod's container  and do a curl request to the container inside the pod: kubectl -it exec <podname> sh
