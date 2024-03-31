@@ -35,6 +35,7 @@ spec:
   # the service becomes a network endpoint by either other services or maybe external users to connect to (eg browser)
   selector:
     app: webapp
+    release: "0-5"
   ports:
     - name: http
       port: 80 # accept internal traffic using this port
