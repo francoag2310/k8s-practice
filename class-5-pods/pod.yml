@@ -1,37 +1,20 @@
 #  -- POD --
 #   - Group of one or more containers with shared storage and network and a specification for how to run the containers.
 #   - It is the most basic unit of deployment in k8s.
+ #  - Pods are not visible outside the k8s cluster. Meaning, I cannot access a webapp in a pod from a browser (they need a service for that)
 
-#  - Pods are not visible outside the k8s cluster. Meaning, I cannot access a webapp in a pod from a browser (they need a service for that)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+spec:
+  containers:
+  - name: webapp
+    image: richardchesterwood/k8s-fleetman-webapp-angular:release0-arm64
+
 
 # common commands for pods
 # 1 - to create the pod,type the command: kubectl apply -f pod.yaml
 # 2 - to get the pod information, type the command: kubectl get pod
 # 3 - to execute a command on that pod, type the command: kubectl exec webapp -- <command>
 # 4 - to get a shell in the pod's container  and do a curl request to the container inside the pod: kubectl -it exec <podname> sh
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: webapp
-  labels:
-    app: webapp
-    release: "0"
-spec:
-  containers:
-  - name: webapp
-    image: richardchesterwood/k8s-fleetman-webapp-angular:release0-arm64
-
----
-# pod example from class 6 where we are changing the image and adding release labels to have "0 downtime"
-apiVersion: v1
-kind: Pod
-metadata:
-  name: webapp-release-0-5
-  labels:
-    app: webapp
-    release: "0-5"
-spec:
-  containers:
-  - name: webapp
-    image: richardchesterwood/k8s-fleetman-webapp-angular:release0-5-arm64
