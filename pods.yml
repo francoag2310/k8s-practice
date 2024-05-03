@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata: # recommended to have a name
   name: webapp
 spec:
+  # minReadySeconds: 10
   selector:
     matchLabels:
-      app: webapp # replicaset will control any pod that matches this label
+      app: webapp # deployment will control any pod that matches this label
   replicas: 2
   template: # template for the pods
     metadata:
