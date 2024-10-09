@@ -16,6 +16,15 @@ spec:
       containers:
       - name: mongodb
         image: mongo:latest
+        volumeMounts:
+          - name: mongo-persistent-storage
+            mountPath: /data/db
+      volumes:
+        - name: mongo-persistent-storage
+          hostPath:
+            path: /Users/franco/directory/structure
+            type: DirectoryOrCreate
+
 
 ---
 apiVersion: v1
